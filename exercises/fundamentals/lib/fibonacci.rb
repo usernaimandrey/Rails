@@ -18,13 +18,4 @@ def fibonacci(num)
   end
   result
 end
-
-# вариант с рекурсией
-# def fibonacci(num)
-#   return nil if num.negative?
-
-#   return num if num <= 1
-
-#   (fibonacci(num - 1) + fibonacci(num - 2))
-# end
 # END

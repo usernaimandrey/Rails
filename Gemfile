@@ -2,4 +2,5 @@
 
 source 'https://rubygems.org'
 
-gem 'minitest-power_assert'
+gem 'rubocop'
+gem 'rubocop-minitest'

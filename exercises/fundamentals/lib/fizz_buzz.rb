@@ -19,22 +19,4 @@ def fizz_buzz(start, stop)
   end
   result.strip
 end
-
-# def fizz_buzz start, stop
-#   return nil if stop < start
-
-#   print_fizz_buzz = lambda {|i|
-
-#     return 'FizzBuzz' if (i % 3).zero? && (i % 5).zero?
-
-#     return 'Fizz' if (i % 3).zero?
-
-#     return 'Buzz' if (i % 5).zero?
-
-#     return i unless ((i % 3).zero? && (i % 5).zero?)
-
-#   }
-
-#   (start..stop).to_a.map(&print_fizz_buzz).join(' ')
-# end
 # END
