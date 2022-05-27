@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
-def make_replacement(word, stub, stop_words)
-  word = stub if stop_words.include?(word)
-  word
-end
+# rubocop:disable Style/For
 
 def make_censored(text, stop_words)
   # BEGIN
   string_stub = '$#%!'
-  text
-    .split
-    .map { |word| make_replacement(word, string_stub, stop_words) }
-    .join(' ')
+  text_to_arr = text.split
+  result = []
+  for word in text_to_arr do
+    word = string_stub if stop_words.include?(word)
+    result << word
+  end
+  result.join(' ')
   # END
 end
+
+# rubocop:enable Style/For
