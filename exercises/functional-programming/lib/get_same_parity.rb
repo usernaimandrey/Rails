@@ -2,16 +2,16 @@
 
 # BEGIN
 class Array
-  def iter(acc, coll, &)
+  def iter(acc, coll, &block)
     return acc if coll.empty?
 
     head, *tail = coll
     acc << head if yield(head)
-    iter(acc, tail, &)
+    iter(acc, tail, &block)
   end
 
-  def my_filter(&)
-    iter([], self, &)
+  def my_filter(&block)
+    iter([], self, &block)
   end
 end
 
