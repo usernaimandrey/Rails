@@ -5,7 +5,7 @@ require_relative '../lib/stack'
 
 class StackTest < Minitest::Test
   # BEGIN
-  def setup
+  def before_setup
     @stack = Stack.new(%w[1 2 3 4 5 6])
     @stack_default = Stack.new
   end
