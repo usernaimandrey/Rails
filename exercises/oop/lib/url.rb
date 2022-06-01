@@ -20,11 +20,13 @@ class Url
   def_delegators :url, :scheme, :host
 
   def ==(other)
-    url == other.url
+    url.to_s == other.url.to_s
   end
 
   def query_params
-    to_h(params_formated(url))
+    return {} unless url.query
+
+    memoize(url)
   end
 
   def query_param(key, default = nil)
@@ -32,17 +34,11 @@ class Url
     params.fetch(key, default)
   end
 
-  protected
+  def memoize(url)
+    return @memo if @memo
 
-  def params_formated(params)
-    return [] unless params.query
-
-    params.query.split('&').map { |param| param.split('=') }
-  end
-
-  def to_h(arr)
-    arr.each_with_object({}) do |param, acc|
-      key, value = param
+    @memo = url.query.split('&').each_with_object({}) do |param, acc|
+      key, value = param.split('=')
       acc[key.to_sym] ||= value
     end
   end
