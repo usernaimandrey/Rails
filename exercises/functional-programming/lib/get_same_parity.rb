@@ -18,8 +18,7 @@ end
 def get_same_parity(list)
   return list if list.empty?
 
-  first_element, = list
-  even_or_odd = first_element.even?
-  list.my_filter { |el| el.even? == even_or_odd }
+  first_element = list.first
+  list.my_filter { |el| el.even? == first_element.even? }
 end
 # END
