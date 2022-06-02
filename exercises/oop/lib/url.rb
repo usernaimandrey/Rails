@@ -7,8 +7,6 @@ require 'uri'
 class Url
   attr_reader :url
 
-  include URI
-
   include Comparable
 
   extend Forwardable
@@ -33,6 +31,8 @@ class Url
     params = query_params
     params.fetch(key, default)
   end
+
+  protected
 
   def memoize(url)
     return @memo if @memo
