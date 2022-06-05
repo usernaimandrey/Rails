@@ -15,16 +15,16 @@ class Url
     @url = URI url
   end
 
-  def_delegators :url, :scheme, :host
+  def_delegators :url, :scheme, :host, :to_s
 
   def ==(other)
-    url.to_s == other.url.to_s
+    to_s == other.to_s
   end
 
   def query_params
     return {} unless url.query
 
-    memoize(url)
+    @query_params ||= memoize
   end
 
   def query_param(key, default = nil)
@@ -34,10 +34,8 @@ class Url
 
   protected
 
-  def memoize(url)
-    return @memo if @memo
-
-    @memo = url.query.split('&').each_with_object({}) do |param, acc|
+  def memoize
+    url.query.split('&').each_with_object({}) do |param, acc|
       key, value = param.split('=')
       acc[key.to_sym] ||= value
     end
