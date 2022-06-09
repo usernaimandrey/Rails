@@ -19,7 +19,7 @@ module Model
   end
 
   module ClassMethod # :nodoc:
-    attr_accessor :schema
+    attr_reader :schema
 
     def update_schema(name, options)
       @schema ||= {}
