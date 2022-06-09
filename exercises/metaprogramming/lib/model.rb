@@ -19,15 +19,17 @@ module Model
   end
 
   module ClassMethod # :nodoc:
-    define_method('update_schema') do |name, options|
+    attr_accessor :schema
+
+    def update_schema(name, options)
       @schema ||= {}
-      @schema.merge!(name => options)
+      @schema[name] = options
     end
+
     def attribute(name, options = {})
       attr_reader name
 
-      update_schema = update_schema(name, options)
-      define_method('schema') { update_schema }
+      update_schema(name, options)
 
       define_method "#{name}=" do |value|
         type = options.fetch(:type, nil)
@@ -38,7 +40,7 @@ module Model
   end
 
   def initialize(attributes = {})
-    @schema = send 'schema'
+    @schema = self.class.schema
     @schema.each_key do |k|
       options = @schema[k.to_sym]
       attribut = attributes[k.to_sym] || options[:default]
