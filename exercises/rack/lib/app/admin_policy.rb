@@ -9,11 +9,11 @@ class AdminPolicy
     # BEGIN
     time_start = (Time.new.to_f * 1_000_000).to_i
     env['TIME_START'] = time_start
-    status, headers, body = @app.call(env)
     request = Rack::Request.new(env)
     if request.path.start_with?('/admin')
-      [403, headers, ['Forbidden']]
+      [403, {}, 'Forbidden']
     else
+      status, headers, body = @app.call(env)
       [status, headers, body]
     end
     # END

@@ -2,7 +2,7 @@
 
 require 'digest'
 
-class Signature
+class Signature # :nodoc:
   def initialize(app)
     @app = app
   end
@@ -11,11 +11,7 @@ class Signature
     # BEGIN
     status, headers, body = @app.call(env)
     hash = Digest::SHA256.hexdigest(body)
-    if status == 404
-      [status, headers, body]
-    else
-      [status, headers, [body, hash]]
-    end
+    [status, headers, [body, hash]]
     # END
   end
 end

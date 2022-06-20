@@ -9,11 +9,11 @@ require_relative 'app/router'
 module App
   def self.init
     Rack::Builder.new do |builder|
-      builder.use AdminPolicy
+      builder.use Signature
       # BEGIN
       builder.use ExecutionTimer
       # END
-      builder.use Signature
+      builder.use AdminPolicy
 
       builder.run Router.new
     end
