@@ -22,4 +22,3 @@ class ArticlesTest < ActionDispatch::IntegrationTest
     assert_match @article.body, @response.body
   end
 end
-
