@@ -1,17 +1,9 @@
-bulletin_1:
-  id: 1
+published:
   title: Title1
   body: Body1
   published: true
 
-bulletin_2:
-  id: 2
+unpublished:
   title: Title2
   body: Body2
   published: false
-
-bulletin_3:
-  id: 3
-  title: Title3
-  body: Body3
-  published: true

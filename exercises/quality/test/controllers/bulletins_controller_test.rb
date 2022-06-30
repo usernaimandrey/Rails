@@ -9,14 +9,22 @@ class BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1', 'Bulletins'
     assert_select 'h2', 'Title1'
-    assert_select 'h2', 'Title3'
+
+    assert_no_match 'Title2', @response.body
   end
 
   test 'should show article' do
-    get bulletin_path(bulletins(:bulletin_1))
+    get bulletin_path(bulletins(:published))
 
     assert_response :success
     assert_select 'h2', 'Title1'
     assert_select 'p', 'Body1'
+  end
+
+  test 'not should show article' do
+    get bulletin_path(bulletins(:unpublished))
+
+    assert_response :missing
+    assert_no_match 'Body2', @response.body
   end
 end

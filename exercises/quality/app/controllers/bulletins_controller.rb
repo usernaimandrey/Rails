@@ -7,7 +7,7 @@ class BulletinsController < ApplicationController
   end
 
   def show
-    @bulletin = Bulletin.find_by(id: params[:id])
+    @bulletin = Bulletin.find(params[:id]).published ? Bulletin.find(params[:id]) : not_found
   end
   # END
 end
