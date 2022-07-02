@@ -25,6 +25,11 @@ class BulletinsControllerTest < ActionDispatch::IntegrationTest
     get bulletin_path(bulletins(:unpublished))
 
     assert_response :missing
-    assert_no_match 'Body2', @response.body
+  end
+
+  test 'with unpublished post' do
+    assert_raises(ActiveRecord::RecordNotFound) do
+      get bulletin_path(bulletins(:unpublished))
+    end
   end
 end
