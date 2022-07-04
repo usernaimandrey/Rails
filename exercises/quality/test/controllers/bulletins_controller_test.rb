@@ -22,12 +22,6 @@ class BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'not should show article' do
-    get bulletin_path(bulletins(:unpublished))
-
-    assert_response :missing
-  end
-
-  test 'with unpublished post' do
     assert_raises(ActiveRecord::RecordNotFound) do
       get bulletin_path(bulletins(:unpublished))
     end
