@@ -13,7 +13,7 @@
 
    <div>
      <%= f.label :status %>
-     <%= f.select :status, %w[new completed], selected: 'new' %>
+     <%= f.select :status, %w[new closed], selected: 'new' %>
   </div>
 
   <div>
@@ -27,7 +27,7 @@
      <%= f.text_field :performer %>
      <p><%= render_error(@task.errors[:performer]) %></p>
   </div>
-
+  
    <div>
      <%= f.submit %>
    </div>

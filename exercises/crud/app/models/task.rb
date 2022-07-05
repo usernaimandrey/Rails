@@ -2,6 +2,7 @@
 
 class Task < ApplicationRecord
   validates :name, :status, :creator, presence: true
+  validates :completed, acceptance: { accept: [true, false] }
   validates :name, length: { maximum: 15,
                              too_long: '%<count>s characters is the maximum allowed' }
   validates :description, length: { maximum: 100,

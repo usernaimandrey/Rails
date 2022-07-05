@@ -11,13 +11,13 @@ class TasksController < ApplicationController
 
   def create
     params = task_params
-    completed = params[:status] != 'new'
-    @task = Task.new(params.merge({ completed: completed }))
+    @task = Task.new(params)
 
     if @task.save
-      redirect_to task_path(@task)
+      redirect_to task_path(@task), notice: 'Task created successfully'
     else
-      render :new
+      flash[:alert] = 'Something went wrong'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -32,27 +32,30 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     params = task_params
-    completed = params[:status] != 'new'
 
-    if @task.update(params.merge({ completed: completed }))
-      redirect_to task_path(@task)
+    if @task.update(params)
+      redirect_to task_path(@task), notice: 'Task update successfully'
     else
-      render :edit
+      flash[:alert] = 'Something went wrong'
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @task = Task.find(params[:id])
     if @task.destroy
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: 'Task destroy successfully'
     else
-      redirect_to task_path(@task)
+      flash[:alert] = 'Something went wrong'
+      redirect_to task_path(@task), status: :unprocessable_entity
     end
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :status, :creator, :performer)
+    task_params = params.require(:task).permit(:name, :description, :status, :creator, :performer, :completed)
+    completed = task_params[:status] == 'closed'
+    task_params.merge({ completed: completed })
   end
 end
