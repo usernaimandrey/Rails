@@ -1,0 +1,15 @@
+new:
+  name: fixed 
+  description: fixed bag 
+  status: new
+  creator: Vasy
+  performer: Pety
+  completed: false
+
+completed:
+  name: add
+  description: add fixtures
+  status: completed
+  creator: Andrey
+  performer: 
+  completed: true

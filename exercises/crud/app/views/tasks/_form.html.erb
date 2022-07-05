@@ -1,0 +1,34 @@
+<%= form_with model: @task do |f| %>
+  <div>
+     <%= f.label :name %>
+     <%= f.text_field :name %>
+     <p><%= render_error(@task.errors[:name]) %></p>
+  </div>
+
+   <div>
+     <%= f.label :description %>
+     <%= f.text_area :description, size: '60x10' %>
+     <p><%= render_error(@task.errors[:description]) %></p>
+  </div>
+
+   <div>
+     <%= f.label :status %>
+     <%= f.select :status, %w[new completed], selected: 'new' %>
+  </div>
+
+  <div>
+     <%= f.label :creator %>
+     <%= f.text_field :creator %>
+     <p><%= render_error(@task.errors[:creator]) %></p>
+  </div>
+
+   <div>
+     <%= f.label :performer %>
+     <%= f.text_field :performer %>
+     <p><%= render_error(@task.errors[:performer]) %></p>
+  </div>
+
+   <div>
+     <%= f.submit %>
+   </div>
+<% end %>
