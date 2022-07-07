@@ -36,7 +36,6 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
     post tasks_path, params: { task: task }
 
-    assert_response :redirect
     new_task = Task.find_by(task)
     assert { new_task }
     assert_redirected_to task_path(new_task)
@@ -66,9 +65,8 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     params_update = { description: 'fixed test', performer: 'Andrey' }
     patch task_path(@task), params: { task: params_update }
 
-    assert_response :redirect
     assert_redirected_to task_path(@task)
-    update_task = Task.find_by(id: @task)
+    update_task = @task.reload
     assert_equal(params_update[:description], update_task.description)
     assert_equal(params_update[:performer], update_task.performer)
   end

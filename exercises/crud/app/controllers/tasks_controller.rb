@@ -10,8 +10,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    params = task_params
-    @task = Task.new(params)
+    @task = Task.new(task_params)
 
     if @task.save
       redirect_to task_path(@task), notice: 'Task created successfully'
@@ -31,9 +30,8 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    params = task_params
 
-    if @task.update(params)
+    if @task.update(task_params)
       redirect_to task_path(@task), notice: 'Task update successfully'
     else
       flash[:alert] = 'Something went wrong'
