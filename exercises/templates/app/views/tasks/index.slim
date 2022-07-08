@@ -1,0 +1,8 @@
+h1 Tasks List
+= link_to 'New Task', new_task_path
+- @tasks.each do |task|
+    h2 = link_to task.name, task_path(task)
+    p = task.creator
+    p = task.status
+    small = task.created_at.strftime('%d-%m-%Y %H:%M:%S')
+    hr
