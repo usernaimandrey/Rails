@@ -1,0 +1,17 @@
+h1
+  = @post.title
+div
+  p
+    = @post.summary
+  p
+    = @post.body
+  p
+    = @post.published ? 'Yes' : 'No'
+div
+  small
+    = @post.created_at.strftime('%d-%m-%Y %H:%M:%S')
+  br
+  = link_to 'Edit', edit_post_path
+  br
+  = link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Удалить задачу?' }
+

@@ -1,0 +1,17 @@
+h1 Posts List
+= link_to 'New Post', new_post_path
+hr
+- @posts.each do |post|
+    - if post.published
+        h2.text-info
+          = link_to post.title, post_path(post)
+    - else
+        h2.bg-danger
+          = link_to post.title, post_path(post)
+
+    p
+      = post.summary
+    small
+      = post.created_at.strftime('%d-%m-%Y %H:%M:%S')
+    hr
+
