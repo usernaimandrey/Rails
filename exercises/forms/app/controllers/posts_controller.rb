@@ -53,8 +53,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    post_params = params.require(:post).permit(:title, :body, :summary, :published)
-    published = post_params[:published] == 'true'
-    post_params.merge({ published: published })
+    params.require(:post).permit(:title, :body, :summary, :published)
   end
 end

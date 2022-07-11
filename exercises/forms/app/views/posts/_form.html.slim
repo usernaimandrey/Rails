@@ -1,4 +1,4 @@
-= simple_form_for @post do |f|
+= simple_form_for post do |f|
     = f.input :title, placeholder: 'Title', input_html: { class: 'form-control-lg' }, label: 'Title for post'
     = f.input :summary, placeholder: 'Summary', input_html: { class: 'form-control-lg' }, label: 'Short description'
     = f.input :body, placeholder: 'Body', input_html: { rows: 20, cols: 50 }
