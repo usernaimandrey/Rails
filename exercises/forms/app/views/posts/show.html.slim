@@ -11,7 +11,7 @@ div
   small
     = @post.created_at.strftime('%d-%m-%Y %H:%M:%S')
   br
-  = link_to 'Edit', edit_post_path
+  = link_to 'Edit', edit_post_path, class: 'btn btn-success mb-2'
   br
-  = link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Удалить задачу?' }
+  = link_to 'Delete', post_path(@post), class: 'btn btn-danger',  method: :delete, data: { confirm: 'Удалить задачу?' }
 
