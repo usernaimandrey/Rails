@@ -1,13 +1,13 @@
- = form_with model: @task do |f|
+ = form_with model: task do |f|
   div
      = f.label :name
      = f.text_field :name
-     p = render_error(@task.errors[:name])
+     p = render_error(errors[:name])
 
   div
      = f.label :description
      = f.text_area :description, size: '60x10'
-     p = render_error(@task.errors[:description])
+     p = render_error(errors[:description])
 
   div
      = f.label :status
@@ -16,12 +16,12 @@
   div
      = f.label :creator
      = f.text_field :creator
-     p = render_error(@task.errors[:creator])
+     p = render_error(errors[:creator])
 
   div
      = f.label :performer
      = f.text_field :performer
-     p = render_error(@task.errors[:performer])
+     p = render_error(errors[:performer])
 
   div
      = f.submit

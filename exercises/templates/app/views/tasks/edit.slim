@@ -1,2 +1,2 @@
 h2 Edit Task
-= render 'form'
+= render partial: 'form', locals: { task: @task, errors: @task.errors }
