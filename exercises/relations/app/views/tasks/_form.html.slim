@@ -1,0 +1,6 @@
+= simple_form_for task do |f|
+    = f.input :name, placeholder: 'Enter name task'
+    = f.input :description, placeholder: 'Description', input_html: { rows: 20, cols: 50 }
+    = f.association :status, selected: :first
+    = f.association :user, selected: :first
+    = f.button :submit, class: 'btn btn-primary mb-2'
