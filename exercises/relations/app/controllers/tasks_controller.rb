@@ -48,9 +48,6 @@ class TasksController < ApplicationController
 
   def task_params
     task_params = params.require(:task).permit(:name, :description, :status_id, :user_id)
-    user = User.find(task_params[:user_id])
-    status = Status.find(task_params[:status_id])
-    task_params.except(:status_id).except(:user_id).merge({ user: user, status: status })
   end
 
   def task
