@@ -6,6 +6,5 @@ class Task < ApplicationRecord
 
   validates :name, :description, presence: true
 
-  scope :find_task, ->(id) { find(id) }
-  scope :find_tasks, -> { limit(15).order(created_at: :desc) }
+  scope :last_tasks, -> { limit(15).order(created_at: :desc) }
 end

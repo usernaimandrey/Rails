@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :task, only: %i[show edit update destroy]
-
   def index
-    @tasks = Task.find_tasks
+    @tasks = Task.last_tasks
   end
 
   def new
@@ -22,11 +20,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @task = Task.find(params[:id])
+  end
 
-  def edit; end
+  def edit
+    @task = Task.find(params[:id])
+  end
 
   def update
+    @task = Task.find(params[:id])
+
     if @task.update(task_params)
       redirect_to task_path(@task), notice: 'Task updated!'
     else
@@ -36,6 +40,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    @task = Task.find(params[:id])
+
     if @task.destroy
       redirect_to tasks_path, notice: 'Task deleted!'
     else
@@ -47,10 +53,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    task_params = params.require(:task).permit(:name, :description, :status_id, :user_id)
-  end
-
-  def task
-    @task = Task.find_task(params[:id])
+    params.require(:task).permit(:name, :description, :status_id, :user_id)
   end
 end

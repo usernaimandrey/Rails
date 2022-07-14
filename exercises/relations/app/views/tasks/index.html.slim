@@ -2,5 +2,8 @@ h1 Tasks List
 = link_to 'New Task', new_task_path, class: 'btn btn-primary'
 - @tasks.each do |task|
     ul.list-group
-      li.list-group-item = link_to task.name, task_path(task)
-      small = task.created_at.strftime("%d-%m-%Y %H:%M:%S")
+      li.list-group-item 
+        = link_to task.name, task_path(task)
+        p User: #{task.user.name}
+        p Status: #{task.status.name}
+        small = task.created_at.strftime("%d-%m-%Y %H:%M:%S")

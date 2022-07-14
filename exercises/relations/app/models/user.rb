@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   # BEGIN
-  has_many :tasks, dependent: :delete_all
+  has_many :tasks, dependent: :destroy
 
   validates :name, presence: true
   # END
