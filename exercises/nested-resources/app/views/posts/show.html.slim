@@ -1,0 +1,18 @@
+- content_for :title do
+  = @post.title
+p
+  strong.me-2 Body:
+  = @post.body
+/ BEGIN
+h2
+  | Comments:
+  .mt-3
+    = render partial: 'posts/comments/comments_list', locals: { post: @post, comments: @post.comments }
+h3 Write your comment
+= render partial: 'posts/comments/form_comment', locals: { comment: @comment, url: post_comments_path(@post)  }
+/ END
+hr
+
+.d-flex
+  = link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-primary mr-2'
+  = link_to 'Back', posts_path, class: 'btn btn-outline-primary'
