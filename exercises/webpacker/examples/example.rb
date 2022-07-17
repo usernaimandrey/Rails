@@ -3,7 +3,7 @@
 gem 'webpacker', '~> 6.0'
 
 # https://github.com/railsware/js-routes
-gem "js-routes"
+gem 'js-routes'
 
 # app/views/layouts/application.html.erb
 # stylesheet_link_tag - хелпер Sprockets, для webpacker используется другой хелпер

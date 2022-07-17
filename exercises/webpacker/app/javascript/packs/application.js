@@ -5,7 +5,7 @@
 
 import "bootstrap/dist/css/bootstrap.min.css"
 // BEGIN
-
+import "@fortawesome/fontawesome-free/css/all"
 // END
 
 import Rails from "@rails/ujs"
