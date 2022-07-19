@@ -1,7 +1,7 @@
 .mb-3.mt-3
   ul.list-group-numbered
     - comments.each do |comment|
-        - unless comment.id.nil?
+        - if comment.id.present?
           li.list-group-item 
             = comment.body
             .btn-group.m-3

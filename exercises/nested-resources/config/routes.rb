@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # BEGIN
   resources :posts do
     scope module: :posts do
-      resources :comments, except: %i[index new show]
+      resources :comments, only: %i[create edit update destroy]
     end
   end
   # END

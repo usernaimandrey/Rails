@@ -9,7 +9,7 @@ h2
   .mt-3
     = render partial: 'posts/comments/comments_list', locals: { post: @post, comments: @post.comments }
 h3 Write your comment
-= render partial: 'posts/comments/form_comment', locals: { comment: @comment, url: post_comments_path(@post)  }
+= render partial: 'posts/comments/form', locals: { comment: @comment, url: post_comments_path(@post)  }
 / END
 hr
 

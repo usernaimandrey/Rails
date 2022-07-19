@@ -28,6 +28,8 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     }
     post post_comments_path(@post), params: { post_comment: comment }
     assert_response 422
+    new_comment = Post::Comment.find_by(comment)
+    assert_not(new_comment)
   end
 
   test '#edit' do
