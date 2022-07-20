@@ -1,0 +1,9 @@
+---
+en:
+  back: Back
+  destroy: Delete
+  destroy_confirmation: Are you sure?
+  edit: Edit
+  home_title: Home page
+  show: Show
+  title: Hexlet's blog
