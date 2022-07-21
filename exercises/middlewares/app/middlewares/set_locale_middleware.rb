@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class SetLocaleMiddleware
-  attr_reader :app
-
   def initialize(app)
     @app = app
   end
