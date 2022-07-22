@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 require_relative '../../lib/request_time_logger'
 require_relative '../../lib/freeze_server'
 

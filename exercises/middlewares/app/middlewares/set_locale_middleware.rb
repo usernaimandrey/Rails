@@ -7,11 +7,7 @@ class SetLocaleMiddleware
 
   # BEGIN
   def call(env)
-    I18n.locale = if env['HTTP_ACCEPT_LANGUAGE'].present?
-                    extract_locale_from_accept_language_header(env)
-                  else
-                    I18n.default_locale
-                  end
+    I18n.locale = extract_locale_from_accept_language_header(env)
 
     @app.call(env)
   end
@@ -19,7 +15,12 @@ class SetLocaleMiddleware
   private
 
   def extract_locale_from_accept_language_header(env)
-    env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    if env['HTTP_ACCEPT_LANGUAGE'].present?
+      language = env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      I18n.available_locales.include?(language.to_sym) ? language : I18n.default_locale
+    else
+      I18n.default_locale
+    end
   end
   # END
 end

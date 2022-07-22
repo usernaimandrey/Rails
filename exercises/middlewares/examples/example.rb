@@ -16,14 +16,12 @@ class RailsServer < ::Rack::Server
   end
 end
 
-
-
 # config/application.rb
 module MiddlewareApp
   class Application < Rails::Application
     config.load_defaults 6.1
 
-  # Удаление миддлвары из списка
+    # Удаление миддлвары из списка
     config.middleware.delete ActionDispatch::Session::CookieStore
     # Поменять мидлвары местами
     config.middleware.swap ActionDispatch::Flash, ActionDispatch::Cookies
@@ -38,9 +36,8 @@ module MiddlewareApp
   end
 end
 
-
 # Метод dup клонирует начальный объект
-hash1 = {key: 'value', key2: 'value2'}
+hash1 = { key: 'value', key2: 'value2' }
 hash2 = hash1.dup
 hash1.delete :key2
 pp hash1 # => {:key=>"value"}

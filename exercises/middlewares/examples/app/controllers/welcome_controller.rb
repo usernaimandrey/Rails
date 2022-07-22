@@ -1,8 +1,7 @@
 class WelcomeController < ApplicationController
   # before_action :call_debugger
 
-  def index
-  end
+  def index; end
 
   private
 
