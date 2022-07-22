@@ -2,10 +2,11 @@
 
 Rails.application.routes.draw do
   # BEGIN
-  get '/:locale', to: 'home#index', as: :root, defaults: { locale: :en }
-  get '/', to: redirect('/%{locale}'), defaults: { locale: :en }
+  get '/', to: redirect('/%{locale}'), defaults: { locale: I18n.default_locale }
 
   scope ('/:locale'), locale: /en|ru/  do
+    root 'home#index', defaults: { locale: I18n.default_locale }
+
     resources :posts do
       scope module: :posts do
         resources :comments, only: %i[create destroy edit update]
