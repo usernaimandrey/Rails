@@ -5,17 +5,14 @@ require 'csv'
 namespace :hexlet do
   desc 'Import users'
   task :import_users, [:path] => :environment do |_t, args|
+    raise 'Error! File path not passed!' if args[:path].blank?
+
+    raise 'Error! File not exist!' unless File.exist?(args[:path])
+
     print "#{'*' * 5} Taks start #{'*' * 5}\n"
-    users = CSV.read(args[:path])
-    users[1..].each do |user|
-      first_name, last_name, birthday, email = user
-      month, day, year = birthday.split('/')
-      User.create(
-        first_name: first_name,
-        last_name: last_name,
-        birthday: "#{day}.#{month}.#{year}",
-        email: email
-      )
+    CSV.foreach(args[:path], headers: true, header_converters: :symbol) do |user|
+      user[:birthday] = DateTime.strptime(user[:birthday], '%m/%d/%Y')
+      User.create(user)
       print '.'
     end
     print "\n#{'*' * 5} ...Done! #{'*' * 5}\n"
