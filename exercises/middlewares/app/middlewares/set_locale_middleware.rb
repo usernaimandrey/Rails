@@ -15,12 +15,10 @@ class SetLocaleMiddleware
   private
 
   def extract_locale_from_accept_language_header(env)
-    if env['HTTP_ACCEPT_LANGUAGE'].present?
-      language = env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-      I18n.available_locales.include?(language.to_sym) ? language : I18n.default_locale
-    else
-      I18n.default_locale
-    end
+    return I18n.default_locale if env['HTTP_ACCEPT_LANGUAGE'].blank?
+
+    locale = env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    I18n.available_locales.include?(locale.to_sym) ? locale : I18n.default_locale
   end
   # END
 end
