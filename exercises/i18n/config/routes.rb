@@ -2,10 +2,8 @@
 
 Rails.application.routes.draw do
   # BEGIN
-  get '/', to: redirect('/%{locale}'), defaults: { locale: I18n.default_locale }
-
-  scope ('/:locale'), locale: /en|ru/  do
-    root 'home#index', defaults: { locale: I18n.default_locale }
+  scope '(:locale)', locale: /en|ru/ do
+    root 'home#index'
 
     resources :posts do
       scope module: :posts do
