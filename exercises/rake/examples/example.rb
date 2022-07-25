@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 namespace :users do
   desc 'Creates 5 users'
-  task create: :environment do
+  task :create => :environment do
     print "Task started...\n"
 
     5.times do |i|
@@ -18,7 +16,7 @@ namespace :users do
   task update: :environment do
     print "Task started...\n"
 
-    User.find(1).update(name: ENV.fetch('name', nil))
+    User.find(1).update(name: ENV['name'])
 
     print "\n...done\n"
   end
@@ -27,7 +25,7 @@ end
 namespace :users do
   # bin/rails 'users:update[vasya]'
   desc 'Updates user name'
-  task :update, [:name] => :environment do |_t, args|
+  task :update, [:name] => :environment do |t, args|
     name = args[:name]
     print "Change user name to #{name}"
 
@@ -38,12 +36,12 @@ namespace :users do
 end
 
 namespace :manipulate_files do
-  desc 'Creates file in tmp folder'
+  desc "Creates file in tmp folder"
   task :create do
-    touch 'tmp/rake_test.file.rb'
+    touch "tmp/rake_test.file.rb"
   end
 
-  desc 'Show files list'
+  desc "Show files list"
   task :show do
     # FileList - хелпер Rake
     # https://docs.ruby-lang.org/en/2.2.0/Rake/FileList.html

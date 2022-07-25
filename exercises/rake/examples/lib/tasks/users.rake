@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 namespace :users do
   desc 'Creates 5 users'
-  task create: :environment do
+  task :create => :environment do
     print "Task started...\n"
 
     5.times do |i|
@@ -14,7 +12,7 @@ namespace :users do
   end
 
   desc 'Updates user name'
-  task update: :environment do
+  task :update => :environment do
     name = ARGV[1]
     print "Change user name to #{name}"
 
