@@ -10,16 +10,20 @@ class Hacker
       get_path = '/users/sign_up'
       post_path = '/users'
       response = sign_up_page(URI.join(hostname, get_path))
-      token = parser(response.body)
+      token = parse_token(response.body)
       cookie = response.response['set-cookie'].split('; ')[0]
       params = {
-        email: email,
-        password: password,
-        password_confirmation: password,
-        authenticity_token: token
+        authenticity_token: token,
+        user: {
+          email: email,
+          password: password,
+          password_confirmation: password
+        }
       }
 
-      sign_up(hostname, post_path, params, cookie)
+      response = sign_up(hostname, post_path, params, cookie)
+      message = response.code.to_i < 400 ? 'Registration completed successfully' : 'Registration faled'
+      p message
     end
 
     def sign_up_page(uri)
@@ -46,7 +50,7 @@ class Hacker
       http
     end
 
-    def parser(page)
+    def parse_token(page)
       html = Nokogiri::HTML(page)
       token_tag = html.at('input[@name="authenticity_token"]')
       token_tag['value']
