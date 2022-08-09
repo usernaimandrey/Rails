@@ -18,11 +18,12 @@ class Hacker
           email: email,
           password: password,
           password_confirmation: password
-        }
+        },
+        commit: 'Регистрация'
       }
 
       response = sign_up(hostname, post_path, params, cookie)
-      message = response.code.to_i < 400 ? 'Registration completed successfully' : 'Registration faled'
+      message = response.code.to_i == 302 ? 'Registration completed successfully' : 'Registration faled'
       p message
     end
 
@@ -37,7 +38,7 @@ class Hacker
       request = Net::HTTP::Post.new uri
       http = setup_ssl(uri)
 
-      request.body = URI.encode_www_form(params)
+      request.body = Rack::Utils.build_nested_query(params)
       request['Cookie'] = cookie
 
       http.request request
