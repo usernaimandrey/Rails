@@ -25,7 +25,7 @@ class VacanciesController < ApplicationController
     @vacancy = Vacancy.find(params[:id])
 
     if @vacancy.publish!
-      redirect_to vacancies_path, notice: 'Status canged on published!'
+      redirect_to vacancies_path, notice: 'Status changed on published!'
     else
       flash[:alert] = "Unable to change status from #{@vacancy.vacancie_state} to published!"
       redirect_to vacancies_path
@@ -36,7 +36,7 @@ class VacanciesController < ApplicationController
     @vacancy = Vacancy.find(params[:id])
 
     if @vacancy.archive!
-      redirect_to vacancies_path, notice: 'Status canged on archived!'
+      redirect_to vacancies_path, notice: 'Status changed on archived!'
     else
       flash[:alert] = "Unable to change status from #{@vacancy.vacancie_state} to archived!"
       redirect_to vacancies_path
