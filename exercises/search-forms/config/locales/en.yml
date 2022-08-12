@@ -1,0 +1,10 @@
+en:
+  posts:
+    search_form:
+      search: Search on name
+      button: Search
+      select_label: Status
+      select_tittle: Select status
+  ransack:
+    cont: contains
+  

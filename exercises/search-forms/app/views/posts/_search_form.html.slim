@@ -1,0 +1,10 @@
+= search_form_for query, builder: SimpleForm::FormBuilder do |f|
+  = f.input :title_cont, input_html: { id: 'q_title_cont', type: 'search' }, label: t('.search')
+  = f.input :aasm_state_eq, as: :select,
+                            collection: Post.aasm.states.map{|status| [status.name.to_s, status.name]}.unshift([t('.select_tittle')]),
+                            selected: :first,
+                            disabled: :first,
+                            label: t('.select_label') 
+  = f.button :submit, value: t('.button'), class: 'btn btn-primary'
+
+= link_to 'Reset', url_for, class: 'btn btn-outline-primary'
