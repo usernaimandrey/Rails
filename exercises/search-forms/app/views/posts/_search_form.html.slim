@@ -1,9 +1,9 @@
-= search_form_for query, builder: SimpleForm::FormBuilder do |f|
+= search_form_for query do |f|
   = f.input :title_cont, input_html: { id: 'q_title_cont', type: 'search' }, label: t('.search')
   = f.input :aasm_state_eq, as: :select,
-                            collection: Post.aasm.states.map{|status| [status.name.to_s, status.name]}.unshift([t('.select_tittle')]),
-                            selected: :first,
-                            disabled: :first,
+                            collection: Post.aasm.states.map(&:name).unshift(t('.select_tittle')),
+                            selected: t('.select_tittle'),
+                            disabled: t('.select_tittle'),
                             label: t('.select_label') 
   = f.button :submit, value: t('.button'), class: 'btn btn-primary'
 

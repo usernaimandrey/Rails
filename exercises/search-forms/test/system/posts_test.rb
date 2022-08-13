@@ -38,4 +38,18 @@ class PostsTest < ApplicationSystemTestCase
 
     assert(found_posts.count == 1)
   end
+
+  test 'sorted on title' do
+    visit posts_url
+
+    click_link('Title')
+
+    found_posts = all('tbody td')
+
+    assert(found_posts[0].text == 'Find It!')
+
+    click_link('Title')
+
+    assert(all('tbody td')[0].text == 'Two')
+  end
 end
