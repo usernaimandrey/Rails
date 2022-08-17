@@ -1,0 +1,18 @@
+---
+en:
+  back: Back
+  destroy: Delete
+  destroy_confirmation: Are you sure?
+  edit: Edit
+  show: Show
+  create: Create New Post
+  posts:
+    new:
+      not_auth: You need to login
+    edit:
+      not_auth: You need to login
+      not_author: You are not the author
+    destroy:
+      not_auth: You need to login
+      not_author: You are not Admin
+      
