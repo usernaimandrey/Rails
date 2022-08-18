@@ -2,10 +2,10 @@
 
 class PostsController < ApplicationController
   # BEGIN
-  after_action :verify_authorized
+  after_action :verify_authorized, only: %i[new create destroy]
 
   def index
-    @posts = authorize Post.all
+    @posts = Post.all
   end
 
   def show
@@ -13,14 +13,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = authorize Post.new
+    authorize Post
+    @post = Post.new
   end
 
   def create
-    @post = current_user&.posts&.build(post_params)
-    raise Pundit::NotAuthorizedError unless @post.present?
+    authorize Post
 
-    authorize @post
+    @post = current_user.posts.build(post_params)
 
     if @post.save
       redirect_to @post, notice: t('.success')
@@ -30,10 +30,12 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = resource_post
+    @post = authorize resource_post
   end
 
   def update
+    authorize resource_post
+
     if resource_post.update(post_params)
       redirect_to resource_post, notice: t('.success')
     else
@@ -42,6 +44,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize resource_post
+
     if resource_post.destroy
       flash[:notice] = t('.success')
     else
@@ -57,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def resource_post
-    @resource_post ||= authorize Post.find(params[:id])
+    @resource_post ||= Post.find(params[:id])
   end
   # END
 end
