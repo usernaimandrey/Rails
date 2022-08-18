@@ -8,6 +8,6 @@ class Resume < ApplicationRecord
   has_many :educations, class_name: 'ResumeEducation', dependent: :destroy
   has_many :works, class_name: 'ResumeWork', dependent: :destroy
 
-  accepts_nested_attributes_for :educations, :works, allow_destroy: true
+  accepts_nested_attributes_for :educations, :works, allow_destroy: true, reject_if: :all_blank
   # END
 end
