@@ -30,11 +30,13 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = authorize set_post
+    @post = set_post
+    authorize @post
   end
 
   def update
-    @post = authorize set_post
+    @post = set_post
+    authorize @post
 
     if @post.update(post_params)
       redirect_to @post, notice: t('.success')
@@ -44,8 +46,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = authorize set_post
-
+    @post = set_post
+    authorize @post
+    
     if @post.destroy
       flash[:notice] = t('.success')
     else
