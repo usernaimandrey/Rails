@@ -2,14 +2,14 @@
 
 class PostsController < ApplicationController
   # BEGIN
-  after_action :verify_authorized, only: %i[new create destroy]
+  after_action :verify_authorized, only: %i[new create edit update destroy]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @post = resource_post
+    @post = set_post
   end
 
   def new
@@ -30,23 +30,23 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = authorize resource_post
+    @post = authorize set_post
   end
 
   def update
-    authorize resource_post
+    @post = authorize set_post
 
-    if resource_post.update(post_params)
-      redirect_to resource_post, notice: t('.success')
+    if @post.update(post_params)
+      redirect_to @post, notice: t('.success')
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    authorize resource_post
+    @post = authorize set_post
 
-    if resource_post.destroy
+    if @post.destroy
       flash[:notice] = t('.success')
     else
       flash[:alert] = t('.faill')
@@ -60,8 +60,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body)
   end
 
-  def resource_post
-    @resource_post ||= Post.find(params[:id])
+  def set_post
+    Post.find(params[:id])
   end
   # END
 end
