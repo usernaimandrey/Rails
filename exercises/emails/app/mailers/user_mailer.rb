@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
   def account_activation
     # BEGIN
     @user = params[:user]
-    mail(from: ENV['MAIL_USERNAME'] || 'example@mail.com', to: @user.email, subject: t('.confirm'))
+    mail(from: ENV.fetch('MAIL_USERNAME', 'example@mail.com'), to: @user.email, subject: t('.confirm'))
     # END
   end
 end

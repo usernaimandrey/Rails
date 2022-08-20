@@ -69,7 +69,7 @@ Rails.application.configure do
     password: ENV.fetch('MAIL_PASSWORD', nil),
     address: ENV.fetch('MAIL_HOST', nil),
     domain: ENV.fetch('MAIL_HOST_Y', nil),
-    port: ENV['SMTP_PORT'] || '25',
+    port: ENV.fetch('SMTP_PORT', '25'),
     # authentication: :cram_md5,
     authentication: 'plain',
     tls: true
