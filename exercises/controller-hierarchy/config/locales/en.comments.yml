@@ -1,0 +1,20 @@
+---
+en:
+  web:
+    movies:
+      comments:
+        edit:
+          edit_movie_comment: Edit movie comment
+        index:
+          back: Back to movie
+          movie_comments: 'Comments of the: %{movie}'
+          new_movie_comment: New comment
+        new:
+          new_movie_comment: New comment
+        create:
+          success: Comment create success!
+        update:
+          success: Comment update success!
+        destroy:
+          success: Comment destroyed success!
+          fail: only admin can delete

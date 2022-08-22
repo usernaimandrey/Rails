@@ -1,0 +1,24 @@
+---
+en:
+  web:
+    movies:
+      reviews:
+        edit:
+          edit_movie_review: Edit movie reviews
+        index:
+          back: Back to movie
+          movie_reviews: 'Reviews of the: %{movie}'
+          new_movie_review: New review
+        new:
+          new_movie_review: New review
+        create:
+          success: Reviews created!
+        update:
+          success: Reviews updated!
+        destroy:
+          success: Reviews destroyed!
+          fails: only admin can delete
+
+    reviews:
+      index:
+        reviews: Reviews
