@@ -30,8 +30,7 @@ class UsersController < ApplicationController
     # BEGIN
     @user = User.find_by(confirmation_token: params[:confirmation_token])
 
-    @user&.activate unless @user&.active?
-    if @user&.save
+    if @user&.activate!
       flash[:notice] = t('.activated')
       redirect_to @user
     else
