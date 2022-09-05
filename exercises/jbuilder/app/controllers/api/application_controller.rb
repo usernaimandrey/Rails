@@ -2,5 +2,6 @@
 
 module Api
   class ApplicationController < ApplicationController
+    include UserConcern
   end
 end

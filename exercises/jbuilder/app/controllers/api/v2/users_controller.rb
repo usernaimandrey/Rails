@@ -5,7 +5,7 @@ module Api
     class UsersController < Api::ApplicationController
       # BEGIN
       def index
-        @users = User.all
+        @users = user_limit(request.url)
 
         render json: @users, each_serializer: UserSerializer
       end
