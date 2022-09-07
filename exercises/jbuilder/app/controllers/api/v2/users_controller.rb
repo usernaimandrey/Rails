@@ -5,15 +5,16 @@ module Api
     class UsersController < Api::ApplicationController
       # BEGIN
       def index
-        @users = user_limit(request.url)
+        # debugger
+        users = user_limit(params[:limit])
 
-        render json: @users, each_serializer: UserSerializer
+        render json: users, each_serializer: UserSerializer
       end
 
       def show
-        @user = User.find(params[:id])
+        user = User.find(params[:id])
 
-        render json: @user, serializer: UserSerializer
+        render json: user, serializer: UserSerializer
       end
       # END
     end
