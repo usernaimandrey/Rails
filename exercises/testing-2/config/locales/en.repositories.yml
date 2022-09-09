@@ -1,0 +1,21 @@
+---
+en:
+  web:
+    repositories:
+      edit:
+        edit_repository: Edit repo
+      create:
+        success: Repo was created!
+        failure: Invalid link or service unavailable!
+      index:
+        default_branch: Default Branch
+        language: Language
+        new_repository: New repo
+        owner_name: Owner
+        repo_created_at: Repo created at
+        repo_name: Repo Name
+        repo_updated_at: Repo updated at
+        repositories: Repositories
+        watchers_count: Watchers
+      new:
+        new_repository: New repo
