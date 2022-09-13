@@ -6,23 +6,25 @@ module Web
   class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     # BEGIN
     setup do
-      api = 'https://api.github.com'
+      @api = 'https://api.github.com'
       @owner = 'users'
       @repo = 'octocat'
-      response_git = load_fixture('files/response.json')
-      stub_url = "#{api}/repos/#{@owner}/#{@repo}"
       @attr = {
         link: "https://github.com/#{@owner}/#{@repo}"
       }
+    end
+
+    test 'should create' do
+      github_response = load_fixture('files/response.json')
+      stub_url = "#{@api}/repos/#{@owner}/#{@repo}"
+
       stub_request(:get, stub_url)
         .to_return(
           headers: { 'Content-Type': 'application/json' },
           status: 200,
-          body: response_git
+          body: github_response
         )
-    end
 
-    test 'should create' do
       post repositories_path, params: { repository: @attr }
 
       new_repo = Repository.find_by(@attr)
@@ -30,7 +32,6 @@ module Web
       assert { new_repo.owner_name == @owner }
       assert { new_repo.repo_name == @repo }
       assert { new_repo }
-      assert_response :redirect
       assert_redirected_to new_repo
     end
 
@@ -38,7 +39,7 @@ module Web
       attr = {
         link: "https://github.com/#{@owner}"
       }
-      stub_request(:get, 'https://api.github.com/')
+      stub_request(:get, @api)
         .to_return(
           status: [422, 'Validation error']
         )

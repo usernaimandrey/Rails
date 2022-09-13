@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-# BEGIN
-require 'octokit'
-# END
-
 class GitHubService
   class << self
-    def call(link)
-      owner_and_repo = Octokit::Repository.from_url(link)
+    def call(id)
+      repository = Repository.find_by(id: id)
+      repository.fetch
+      repository.save
+      owner_and_repo = Octokit::Repository.from_url(repository.link)
 
       response = Octokit::Client.new.repo(
         owner: owner_and_repo.owner,
@@ -17,7 +16,6 @@ class GitHubService
       attr = {
         owner_name: owner_and_repo.owner,
         repo_name: owner_and_repo.repo,
-        link: owner_and_repo.url,
         description: response[:description],
         default_branch: response[:default_branch],
         watchers_count: response[:watchers_count],
@@ -25,11 +23,12 @@ class GitHubService
         repo_created_at: response[:created_at],
         repo_updated_at: response[:updated_at]
       }
-      repo = Repository.new(attr)
-      repo.save
-      repo
+      repository.update(attr)
+      repository.complet
+      repository.save
     rescue StandardError
-      Repository.new
+      repository.fail
+      repository.save
     end
   end
 end
