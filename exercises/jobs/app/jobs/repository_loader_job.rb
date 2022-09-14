@@ -5,7 +5,7 @@
 class RepositoryLoaderJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    GitHubService.call(args.first)
+  def perform(id)
+    RepositoryService.call(id)
   end
 end

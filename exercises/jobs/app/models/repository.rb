@@ -6,7 +6,7 @@ class Repository < ApplicationRecord
   validates :link, presence: true, uniqueness: true
 
   # BEGIN
-  aasm whiny_transitions: false do
+  aasm do
     state :created, initial: true
     state :fetching
     state :fetched
@@ -16,7 +16,7 @@ class Repository < ApplicationRecord
       transitions from: %i[created fetched failed], to: :fetching
     end
 
-    event :complet do
+    event :complete do
       transitions from: :fetching, to: :fetched
     end
 

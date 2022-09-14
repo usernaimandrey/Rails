@@ -33,7 +33,7 @@ module Web
       @repository = Repository.find_by(params[:id])
 
       if @repository.present?
-        RepositoryLoaderJob.set(wait: 5.seconds).perform_later(@repository.id)
+        RepositoryLoaderJob.perform_later(@repository.id)
         flash[:notice] = t('.success')
       else
         flash[:alert] = t('.failure')
