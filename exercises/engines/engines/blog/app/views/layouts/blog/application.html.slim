@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    title
+      | Blog
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    "blog/application", media: "all"
+  body
+    = yield
